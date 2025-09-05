@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cam Carter - Next Gen Merch Experience</title>
+    <title>Cam Carter - Ultimate Fan Experience</title>
     <style>
         * {
             margin: 0;
@@ -13,7 +13,7 @@
 
         body {
             font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: #0074d9;
+            background: #0a0a0a;
             min-height: 100vh;
             color: white;
             overflow-x: hidden;
@@ -28,7 +28,7 @@
             width: 100%;
             height: 100%;
             z-index: -1;
-            background:linear-gradient(45deg, #1a1a1a, #2e2e3a, #5c5c7a, #f5f5f5);
+            background: linear-gradient(45deg, #667eea, #764ba2, #f093fb, #f5576c);
             background-size: 400% 400%;
             animation: gradientShift 8s ease infinite;
         }
@@ -57,6 +57,152 @@
         @keyframes float {
             0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0; }
             50% { transform: translateY(-100px) rotate(180deg); opacity: 1; }
+        }
+
+        /* Login/Signup System */
+        .auth-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 5000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .auth-container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(30px);
+            border-radius: 25px;
+            padding: 40px;
+            max-width: 350px;
+            width: 90%;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            text-align: center;
+            animation: authSlideIn 0.5s ease;
+        }
+
+        @keyframes authSlideIn {
+            from { opacity: 0; transform: translateY(50px) scale(0.9); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .auth-title {
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #FFD700, #FFA500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .auth-subtitle {
+            font-size: 14px;
+            opacity: 0.8;
+            margin-bottom: 30px;
+        }
+
+        .auth-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .auth-input {
+            padding: 15px 20px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .auth-input:focus {
+            outline: none;
+            border-color: #FFD700;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+        }
+
+        .auth-input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .verification-input {
+            text-align: center;
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 10px;
+        }
+
+        .auth-btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            background: linear-gradient(45deg, #FFD700, #FFA500);
+            color: #333;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .auth-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(255, 215, 0, 0.4);
+        }
+
+        .auth-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .auth-switch {
+            margin-top: 20px;
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        .auth-link {
+            color: #FFD700;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        .verification-status {
+            margin: 15px 0;
+            padding: 10px;
+            border-radius: 10px;
+            font-size: 14px;
+        }
+
+        .status-success {
+            background: rgba(76, 175, 80, 0.2);
+            border: 1px solid rgba(76, 175, 80, 0.5);
+            color: #4CAF50;
+        }
+
+        .status-error {
+            background: rgba(244, 67, 54, 0.2);
+            border: 1px solid rgba(244, 67, 54, 0.5);
+            color: #F44336;
+        }
+
+        .status-info {
+            background: rgba(33, 150, 243, 0.2);
+            border: 1px solid rgba(33, 150, 243, 0.5);
+            color: #2196F3;
+        }
+
+        /* Main App Styles */
+        .app-container {
+            display: none;
         }
 
         .container {
@@ -94,7 +240,7 @@
             50% { background-position: 100% 50%; }
         }
 
-        .tagline {
+        .welcome-user {
             font-size: 14px;
             opacity: 0.9;
             font-weight: 500;
@@ -127,7 +273,7 @@
             opacity: 0.8;
         }
 
-        /* Enhanced Cards */
+        /* Glass Card Base */
         .glass-card {
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(30px);
@@ -160,170 +306,179 @@
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
         }
 
-        /* AI-Powered Drop Alert */
-        .ai-drop-alert {
-            background: linear-gradient(135deg, rgba(255, 107, 107, 0.2), rgba(255, 142, 83, 0.2));
-            border: 2px solid rgba(255, 107, 107, 0.3);
-            animation: aiPulse 2s ease-in-out infinite;
-        }
-
-        @keyframes aiPulse {
-            0%, 100% { 
-                box-shadow: 0 0 20px rgba(255, 107, 107, 0.3);
-                border-color: rgba(255, 107, 107, 0.3);
-            }
-            50% { 
-                box-shadow: 0 0 40px rgba(255, 107, 107, 0.6);
-                border-color: rgba(255, 107, 107, 0.6);
-            }
-        }
-
-        .drop-header {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-
-        .ai-avatar {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 28px;
+        /* Interactive Map */
+        .map-container {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.2), rgba(118, 75, 162, 0.2));
+            border: 2px solid rgba(102, 126, 234, 0.3);
+            height: 300px;
             position: relative;
-            animation: rotate 4s linear infinite;
+            overflow: hidden;
         }
 
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        .ai-avatar::after {
-            content: '';
-            position: absolute;
-            width: 70px;
-            height: 70px;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            border-top-color: #FFD700;
-            animation: spin 2s linear infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        .drop-info {
-            flex: 1;
-        }
-
-        .ai-prediction {
-            background: rgba(255, 215, 0, 0.1);
-            border-left: 4px solid #FFD700;
-            padding: 15px;
-            border-radius: 10px;
-            margin: 15px 0;
-        }
-
-        .prediction-text {
-            font-size: 14px;
-            font-style: italic;
-            margin-bottom: 8px;
-        }
-
-        .confidence-bar {
+        .map-view {
             width: 100%;
-            height: 4px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 2px;
-            overflow: hidden;
-        }
-
-        .confidence-fill {
             height: 100%;
-            background: linear-gradient(90deg, #FFD700, #4ECDC4);
-            width: 87%;
-            border-radius: 2px;
-            animation: fillUp 2s ease-out;
+            background: linear-gradient(45deg, #2c3e50, #34495e);
+            position: relative;
+            cursor: grab;
         }
 
-        @keyframes fillUp {
-            from { width: 0%; }
-            to { width: 87%; }
+        .map-view:active {
+            cursor: grabbing;
         }
 
-        /* 3D Merch Preview */
-        .merch-3d-container {
-            perspective: 1000px;
-            margin: 20px 0;
-        }
-
-        .merch-carousel {
-            display: flex;
-            gap: 15px;
-            overflow-x: auto;
-            padding: 20px 0;
-            scroll-behavior: smooth;
-        }
-
-        .merch-3d-item {
-            min-width: 100px;
-            height: 100px;
-            background: linear-gradient(45deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
-            border-radius: 20px;
+        .map-marker {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 32px;
-            border: 2px solid rgba(255, 255, 255, 0.3);
             cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative;
-            overflow: hidden;
+            transition: all 0.3s ease;
+            animation: markerPulse 2s ease-in-out infinite;
         }
 
-        .merch-3d-item:hover {
-            transform: rotateY(15deg) rotateX(5deg) scale(1.1);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        @keyframes markerPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
         }
 
-        .merch-3d-item::before {
-            content: '';
+        .marker-concert {
+            background: linear-gradient(45deg, #FF6B6B, #FF8E53);
+            top: 30%;
+            left: 25%;
+        }
+
+        .marker-nft {
+            background: linear-gradient(45deg, #4ECDC4, #44A08D);
+            top: 60%;
+            left: 70%;
+        }
+
+        .marker-drop {
+            background: linear-gradient(45deg, #FFD700, #FFA500);
+            top: 45%;
+            left: 50%;
+        }
+
+        .marker-fan {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            top: 20%;
+            left: 80%;
+        }
+
+        .map-controls {
             position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-            transform: rotate(45deg);
-            transition: all 0.5s;
-            opacity: 0;
-        }
-
-        .merch-3d-item:hover::before {
-            opacity: 1;
-            animation: shine 0.5s ease-out;
-        }
-
-        @keyframes shine {
-            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
-            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
-        }
-
-        /* Enhanced Buttons */
-        .btn-group {
+            top: 15px;
+            right: 15px;
             display: flex;
-            gap: 12px;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .map-btn {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: none;
+            border-radius: 10px;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .map-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+
+        .map-legend {
+            position: absolute;
+            bottom: 15px;
+            left: 15px;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 15px;
+            font-size: 12px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 5px;
+        }
+
+        .legend-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        /* Fan Activities Hub */
+        .activities-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
             margin-top: 20px;
         }
 
+        .activity-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .activity-card:hover {
+            transform: translateY(-8px) rotateX(5deg);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .activity-icon {
+            font-size: 32px;
+            margin-bottom: 10px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .activity-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .activity-subtitle {
+            font-size: 12px;
+            opacity: 0.7;
+        }
+
+        .activity-badge {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: linear-gradient(45deg, #FF6B6B, #FF8E53);
+            color: white;
+            padding: 2px 6px;
+            border-radius: 8px;
+            font-size: 10px;
+            font-weight: 700;
+        }
+
+        /* Enhanced Buttons */
         .btn-enhanced {
-            flex: 1;
             padding: 16px 24px;
             border: none;
             border-radius: 30px;
@@ -333,6 +488,8 @@
             position: relative;
             overflow: hidden;
             transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            width: 100%;
+            margin-top: 15px;
         }
 
         .btn-primary-enhanced {
@@ -351,224 +508,6 @@
         .btn-enhanced:hover {
             transform: translateY(-3px);
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
-        }
-
-        .btn-enhanced::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.5s;
-        }
-
-        .btn-enhanced:active::before {
-            left: 100%;
-        }
-
-        /* AR Hunt with AI */
-        .ar-hunt-enhanced {
-            background: linear-gradient(135deg, rgba(78, 205, 196, 0.2), rgba(102, 126, 234, 0.2));
-            border: 2px solid rgba(78, 205, 196, 0.3);
-        }
-
-        .hunt-progress-ring {
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 20px;
-            position: relative;
-        }
-
-        .progress-ring {
-            transform: rotate(-90deg);
-        }
-
-        .progress-ring-circle {
-            stroke: rgba(255, 255, 255, 0.2);
-            stroke-width: 4;
-            fill: transparent;
-            r: 36;
-            cx: 40;
-            cy: 40;
-        }
-
-        .progress-ring-progress {
-            stroke: #4ECDC4;
-            stroke-width: 4;
-            fill: transparent;
-            r: 36;
-            cx: 40;
-            cy: 40;
-            stroke-dasharray: 226;
-            stroke-dashoffset: 90;
-            transition: stroke-dashoffset 0.5s;
-        }
-
-        .progress-percentage {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 18px;
-            font-weight: 700;
-            color: #4ECDC4;
-        }
-
-        /* AI Voice Assistant */
-        .voice-assistant {
-            position: fixed;
-            bottom: 100px;
-            right: 20px;
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
-            transition: all 0.3s ease;
-            z-index: 1000;
-        }
-
-        .voice-assistant:hover {
-            transform: scale(1.1);
-            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.6);
-        }
-
-        .voice-assistant.listening {
-            animation: voicePulse 1s ease-in-out infinite;
-        }
-
-        @keyframes voicePulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.2); }
-        }
-
-        /* NFT Marketplace Enhanced */
-        .nft-enhanced {
-            background: linear-gradient(45deg, #1a1a1a, #2e2e3a, #5c5c7a, #f5f5f5));
-            border: 2px solid rgba(245, 87, 108, 0.3);
-        }
-
-        .nft-grid-enhanced {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-            margin-top: 25px;
-        }
-
-        .nft-card-enhanced {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(20px);
-            border-radius: 20px;
-            padding: 20px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .nft-card-enhanced:hover {
-            transform: translateY(-8px) rotateX(5deg);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-        }
-
-        .nft-rarity {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: linear-gradient(45deg, #FFD700, #FFA500);
-            color: #333;
-            padding: 4px 8px;
-            border-radius: 10px;
-            font-size: 10px;
-            font-weight: 700;
-        }
-
-        .nft-icon-enhanced {
-            font-size: 40px;
-            margin-bottom: 15px;
-            animation: float 3s ease-in-out infinite;
-        }
-
-        .nft-price-enhanced {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 10px;
-        }
-
-        .price-crypto {
-            color: #4ECDC4;
-            font-weight: 700;
-        }
-
-        .price-usd {
-            color: #FFD700;
-            font-size: 12px;
-        }
-
-        /* Social Trading */
-        .social-trading {
-            background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(255, 165, 0, 0.2));
-            border: 2px solid rgba(255, 215, 0, 0.3);
-            margin-bottom: 20px;
-        }
-
-        .trading-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .fan-avatars {
-            display: flex;
-            margin-left: -10px;
-        }
-
-        .fan-avatar {
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
-            border: 2px solid white;
-            margin-left: -10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 12px;
-        }
-
-        .trading-stats {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-
-        .trading-stat {
-            text-align: center;
-            padding: 15px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-        }
-
-        .stat-value {
-            font-size: 20px;
-            font-weight: 700;
-            color: #FFD700;
-        }
-
-        .stat-change {
-            font-size: 12px;
-            color: #4ECDC4;
         }
 
         /* Enhanced Navigation */
@@ -661,6 +600,8 @@
             border: 1px solid rgba(255, 255, 255, 0.2);
             text-align: center;
             animation: modalSlideIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            max-height: 80vh;
+            overflow-y: auto;
         }
 
         @keyframes modalSlideIn {
@@ -672,6 +613,17 @@
                 opacity: 1;
                 transform: translateY(0) scale(1);
             }
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
         }
 
         /* Notification System */
@@ -711,11 +663,31 @@
             margin: 20px auto;
         }
 
-        /* Responsive Enhancements */
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Responsive */
         @media (max-width: 380px) {
             .container { padding: 15px; }
             .artist-name { font-size: 28px; }
-            .nft-grid-enhanced { grid-template-columns: 1fr; }
+            .activities-grid { grid-template-columns: 1fr; }
+        }
+
+        /* Hide scrollbar but keep functionality */
+        .modal-content-enhanced::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .modal-content-enhanced::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+        }
+
+        .modal-content-enhanced::-webkit-scrollbar-thumb {
+            background: rgba(255, 215, 0, 0.5);
+            border-radius: 3px;
         }
     </style>
 </head>
@@ -724,260 +696,237 @@
         <div class="bg-particles" id="particles"></div>
     </div>
 
-    <div class="container">
-        <div class="header">
-            <div class="artist-name">CAM CARTER</div>
-            <div class="tagline">Next-Gen Merch Experience • AI-Powered</div>
-            
-            <div class="live-stats">
-                <div class="stat-item">
-                    <div class="stat-number" id="activeDrops">3</div>
-                    <div class="stat-label">Live Drops</div>
+    <!-- Authentication System -->
+    <div id="authOverlay" class="auth-overlay">
+        <div class="auth-container">
+            <!-- Login Form -->
+            <div id="loginForm">
+                <div class="auth-title">Welcome Back</div>
+                <div class="auth-subtitle">Sign in to access exclusive content</div>
+                <form class="auth-form" onsubmit="handleLogin(event)">
+                    <input type="email" class="auth-input" placeholder="Email" id="loginEmail" required>
+                    <input type="password" class="auth-input" placeholder="Password" id="loginPassword" required>
+                    <button type="submit" class="auth-btn">Sign In</button>
+                </form>
+                <div class="auth-switch">
+                    Don't have an account? <span class="auth-link" onclick="showSignup()">Sign up</span>
                 </div>
-                <div class="stat-item">
-                    <div class="stat-number" id="fanCount">12.4K</div>
-                    <div class="stat-label">Active Fans</div>
+            </div>
+
+            <!-- Signup Form -->
+            <div id="signupForm" style="display: none;">
+                <div class="auth-title">Join the Experience</div>
+                <div class="auth-subtitle">Create your account for exclusive access</div>
+                <form class="auth-form" onsubmit="handleSignup(event)">
+                    <input type="text" class="auth-input" placeholder="Full Name" id="signupName" required>
+                    <input type="email" class="auth-input" placeholder="Email" id="signupEmail" required>
+                    <input type="password" class="auth-input" placeholder="Password" id="signupPassword" required>
+                    <input type="password" class="auth-input" placeholder="Confirm Password" id="confirmPassword" required>
+                    <button type="submit" class="auth-btn">Create Account</button>
+                </form>
+                <div class="auth-switch">
+                    Already have an account? <span class="auth-link" onclick="showLogin()">Sign in</span>
                 </div>
-                <div class="stat-item">
-                    <div class="stat-number" id="earnings">$8.2K</div>
-                    <div class="stat-label">Today</div>
+            </div>
+
+            <!-- Email Verification -->
+            <div id="verificationForm" style="display: none;">
+                <div class="auth-title">Verify Your Email</div>
+                <div class="auth-subtitle">We sent a 6-digit code to <span id="verificationEmail"></span></div>
+                <form class="auth-form" onsubmit="handleVerification(event)">
+                    <input type="text" class="auth-input verification-input" placeholder="000000" id="verificationCode" maxlength="6" required>
+                    <div id="verificationStatus"></div>
+                    <button type="submit" class="auth-btn" id="verifyBtn">Verify Email</button>
+                </form>
+                <div class="auth-switch">
+                    Didn't receive the code? <span class="auth-link" onclick="resendCode()">Resend</span>
                 </div>
             </div>
         </div>
-
-        <!-- AI-Powered Drop Alert -->
-        <div class="glass-card ai-drop-alert">
-            <div class="drop-header">
-                <div class="ai-avatar">🤖</div>
-                <div class="drop-info">
-                    <div class="alert-title" style="font-size: 18px; font-weight: 700; margin-bottom: 5px;">
-                        AI Drop Prediction
-                    </div>
-                    <div class="alert-location" style="font-size: 14px; opacity: 0.8;">
-                        📍 Venice Beach • Optimal time: 6:30 PM
-                    </div>
-                </div>
-            </div>
-            
-            <div class="ai-prediction">
-                <div class="prediction-text">
-                    "Based on fan behavior patterns, this drop will sell out in 12 minutes. Peak demand expected at sunset."
-                </div>
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 8px;">
-                    <span style="font-size: 12px;">AI Confidence</span>
-                    <span style="font-size: 12px; color: #4ECDC4;">87%</span>
-                </div>
-                <div class="confidence-bar">
-                    <div class="confidence-fill"></div>
-                </div>
-            </div>
-            
-            <div class="merch-3d-container">
-                <div class="merch-carousel">
-                    <div class="merch-3d-item" onclick="view3DMerch('hoodie')">👕</div>
-                    <div class="merch-3d-item" onclick="view3DMerch('cap')">🧢</div>
-                    <div class="merch-3d-item" onclick="view3DMerch('headphones')">🎧</div>
-                    <div class="merch-3d-item" onclick="view3DMerch('vinyl')">💿</div>
-                    <div class="merch-3d-item" onclick="view3DMerch('poster')">🖼️</div>
-                </div>
-            </div>
-            
-            <div class="btn-group">
-                <button class="btn-enhanced btn-primary-enhanced" onclick="startAIHunt()">
-                    🎯 Start AI Hunt
-                </button>
-                <button class="btn-enhanced btn-secondary-enhanced" onclick="viewDrop()">
-                    📍 Navigate
-                </button>
-            </div>
-        </div>
-
-        <!-- Enhanced AR Hunt -->
-        <div class="glass-card ar-hunt-enhanced">
-            <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 20px;">
-                <div style="font-size: 24px; font-weight: 700;">🎯 AI-Powered Hunt</div>
-                <div style="background: rgba(78, 205, 196, 0.2); padding: 5px 10px; border-radius: 15px; font-size: 12px;">
-                    LIVE
-                </div>
-            </div>
-            
-            <div class="hunt-progress-ring">
-                <svg class="progress-ring" width="80" height="80">
-                    <circle class="progress-ring-circle"></circle>
-                    <circle class="progress-ring-progress"></circle>
-                </svg>
-                <div class="progress-percentage">60%</div>
-            </div>
-            
-            <div style="background: rgba(255, 255, 255, 0.1); border-radius: 15px; padding: 20px; margin-bottom: 20px;">
-                <div style="font-size: 16px; margin-bottom: 10px; font-style: italic;">
-                    "AI detected: Golden mic stand near the pier. Heat signature suggests recent activity..."
-                </div>
-                <div style="display: flex; justify-content: space-between; align-items: center; font-size: 14px;">
-                    <span>🎁 Reward: Limited Edition Hoodie</span>
-                    <span style="color: #4ECDC4;">2/3 Clues</span>
-                </div>
-            </div>
-            
-            <div class="btn-group">
-                <button class="btn-enhanced btn-primary-enhanced" onclick="openARCamera()">
-                    📱 AR Scanner
-                </button>
-                <button class="btn-enhanced btn-secondary-enhanced" onclick="getAIHint()">
-                    💡 AI Hint
-                </button>
-            </div>
-        </div>
-
-        <!-- Social Trading Platform -->
-        <div class="glass-card social-trading">
-            <div class="trading-header">
-                <div style="font-size: 20px; font-weight: 700;">💰 Fan Trading Hub</div>
-                <div class="fan-avatars">
-                    <div class="fan-avatar">👤</div>
-                    <div class="fan-avatar">👩</div>
-                    <div class="fan-avatar">👨</div>
-                    <div class="fan-avatar">+47</div>
-                </div>
-            </div>
-            
-            <div class="trading-stats">
-                <div class="trading-stat">
-                    <div class="stat-value">$2.4K</div>
-                    <div style="font-size: 12px; margin-bottom: 5px;">Volume</div>
-                    <div class="stat-change">+15.2%</div>
-                </div>
-                <div class="trading-stat">
-                    <div class="stat-value">127</div>
-                    <div style="font-size: 12px; margin-bottom: 5px;">Trades</div>
-                    <div class="stat-change">+8.7%</div>
-                </div>
-                <div class="trading-stat">
-                    <div class="stat-value">0.08</div>
-                    <div style="font-size: 12px; margin-bottom: 5px;">Avg ETH</div>
-                    <div class="stat-change">+3.1%</div>
-                </div>
-            </div>
-            
-            <button class="btn-enhanced btn-primary-enhanced" onclick="openTrading()" style="width: 100%;">
-                🚀 Join Trading Floor
-            </button>
-        </div>
-
-        <!-- Enhanced NFT Marketplace -->
-        <div class="glass-card nft-enhanced">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px;">
-                <div style="font-size: 20px; font-weight: 700;">💎 Digital Vault</div>
-                <div style="background: rgba(245, 87, 108, 0.2); padding: 5px 10px; border-radius: 15px; font-size: 12px;">
-                    HOT 🔥
-                </div>
-            </div>
-            
-            <div class="nft-grid-enhanced">
-                <div class="nft-card-enhanced" onclick="viewEnhancedNFT('lyrics')">
-                    <div class="nft-rarity">RARE</div>
-                    <div class="nft-icon-enhanced">📝</div>
-                    <div style="font-size: 14px; font-weight: 600; margin-bottom: 5px;">Lyric Genesis</div>
-                    <div class="nft-price-enhanced">
-                        <span class="price-crypto">0.05 ETH</span>
-                        <span class="price-usd">$127</span>
-                    </div>
-                </div>
-                
-                <div class="nft-card-enhanced" onclick="viewEnhancedNFT('beats')">
-                    <div class="nft-rarity">EPIC</div>
-                    <div class="nft-icon-enhanced">🎵</div>
-                    <div style="font-size: 14px; font-weight: 600; margin-bottom: 5px;">Beat Vault</div>
-                    <div class="nft-price-enhanced">
-                        <span class="price-crypto">0.12 ETH</span>
-                        <span class="price-usd">$304</span>
-                    </div>
-                </div>
-                
-                <div class="nft-card-enhanced" onclick="viewEnhancedNFT('footage')">
-                    <div class="nft-rarity">LEGENDARY</div>
-                    <div class="nft-icon-enhanced">🎬</div>
-                    <div style="font-size: 14px; font-weight: 600; margin-bottom: 5px;">Studio Secrets</div>
-                    <div class="nft-price-enhanced">
-                        <span class="price-crypto">0.25 ETH</span>
-                        <span class="price-usd">$634</span>
-                    </div>
-                </div>
-                
-                <div class="nft-card-enhanced" onclick="viewEnhancedNFT('vip')">
-                    <div class="nft-rarity">MYTHIC</div>
-                    <div class="nft-icon-enhanced">👑</div>
-                    <div style="font-size: 14px; font-weight: 600; margin-bottom: 5px;">VIP Universe</div>
-                    <div class="nft-price-enhanced">
-                        <span class="price-crypto">0.5 ETH</span>
-                        <span class="price-usd">$1,267</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div style="height: 120px;"></div>
     </div>
 
-    <!-- AI Voice Assistant -->
-    <div class="voice-assistant" onclick="toggleVoiceAssistant()" id="voiceAssistant">
-        🎤
+    <!-- Main App -->
+    <div id="appContainer" class="app-container">
+        <div class="container">
+            <div class="header">
+                <div class="artist-name">CAM CARTER</div>
+                <div class="welcome-user">Welcome back, <span id="userName">Fan</span>! 🎵</div>
+                
+                <div class="live-stats">
+                    <div class="stat-item">
+                        <div class="stat-number" id="activeDrops">5</div>
+                        <div class="stat-label">Live Drops</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" id="fanCount">15.2K</div>
+                        <div class="stat-label">Active Fans</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" id="earnings">$12.8K</div>
+                        <div class="stat-label">Today</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interactive Map -->
+            <div class="glass-card map-container">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                    <div style="font-size: 20px; font-weight: 700;">🗺️ Live Map</div>
+                    <div style="background: rgba(76, 175, 80, 0.2); padding: 5px 10px; border-radius: 15px; font-size: 12px; color: #4CAF50;">
+                        REAL-TIME
+                    </div>
+                </div>
+                
+                <div class="map-view" id="mapView">
+                    <div class="map-marker marker-concert" onclick="showMarkerInfo('concert')" title="Upcoming Concert">🎤</div>
+                    <div class="map-marker marker-nft" onclick="showMarkerInfo('nft')" title="NFT Hotspot">💎</div>
+                    <div class="map-marker marker-drop" onclick="showMarkerInfo('drop')" title="Active Drop">🎁</div>
+                    <div class="map-marker marker-fan" onclick="showMarkerInfo('fan')" title="Fan Meetup">👥</div>
+                    
+                    <div class="map-controls">
+                        <button class="map-btn" onclick="zoomIn()" title="Zoom In">+</button>
+                        <button class="map-btn" onclick="zoomOut()" title="Zoom Out">-</button>
+                        <button class="map-btn" onclick="centerMap()" title="Center">📍</button>
+                        <button class="map-btn" onclick="toggleLayer()" title="Toggle Layer">🔄</button>
+                    </div>
+                    
+                    <div class="map-legend">
+                        <div class="legend-item">
+                            <div class="legend-dot" style="background: linear-gradient(45deg, #FF6B6B, #FF8E53);"></div>
+                            <span>Concerts</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-dot" style="background: linear-gradient(45deg, #4ECDC4, #44A08D);"></div>
+                            <span>NFT Drops</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-dot" style="background: linear-gradient(45deg, #FFD700, #FFA500);"></div>
+                            <span>Merch Drops</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-dot" style="background: linear-gradient(45deg, #667eea, #764ba2);"></div>
+                            <span>Fan Meetups</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Fan Activities Hub -->
+            <div class="glass-card">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                    <div style="font-size: 20px; font-weight: 700;">🎮 Fan Activities</div>
+                    <div style="background: rgba(255, 215, 0, 0.2); padding: 5px 10px; border-radius: 15px; font-size: 12px; color: #FFD700;">
+                        NEW REWARDS
+                    </div>
+                </div>
+                
+                <div class="activities-grid">
+                    <div class="activity-card" onclick="openActivity('karaoke')">
+                        <div class="activity-badge">LIVE</div>
+                        <div class="activity-icon">🎤</div>
+                        <div class="activity-title">Virtual Karaoke</div>
+                        <div class="activity-subtitle">Sing with fans</div>
+                    </div>
+                    
+                    <div class="activity-card" onclick="openActivity('remix')">
+                        <div class="activity-badge">HOT</div>
+                        <div class="activity-icon">🎵</div>
+                        <div class="activity-title">Beat Remix</div>
+                        <div class="activity-subtitle">Create remixes</div>
+                    </div>
+                    
+                    <div class="activity-card" onclick="openActivity('trivia')">
+                        <div class="activity-badge">DAILY</div>
+                        <div class="activity-icon">🧠</div>
+                        <div class="activity-title">Music Trivia</div>
+                        <div class="activity-subtitle">Test knowledge</div>
+                    </div>
+                    
+                    <div class="activity-card" onclick="openActivity('dance')">
+                        <div class="activity-badge">VIRAL</div>
+                        <div class="activity-icon">💃</div>
+                        <div class="activity-title">Dance Challenge</div>
+                        <div class="activity-subtitle">Show moves</div>
+                    </div>
+                    
+                    <div class="activity-card" onclick="openActivity('lyrics')">
+                        <div class="activity-badge">NEW</div>
+                        <div class="activity-icon">✍️</div>
+                        <div class="activity-title">Lyric Writing</div>
+                        <div class="activity-subtitle">Collaborate</div>
+                    </div>
+                    
+                    <div class="activity-card" onclick="openActivity('concert')">
+                        <div class="activity-badge">VIP</div>
+                        <div class="activity-icon">🎪</div>
+                        <div class="activity-title">Virtual Concert</div>
+                        <div class="activity-subtitle">Front row seat</div>
+                    </div>
+                    
+                    <div class="activity-card" onclick="openActivity('fanart')">
+                        <div class="activity-badge">FEATURED</div>
+                        <div class="activity-icon">🎨</div>
+                        <div class="activity-title">Fan Art Gallery</div>
+                        <div class="activity-subtitle">Share creations</div>
+                    </div>
+                    
+                    <div class="activity-card" onclick="openActivity('meetup')">
+                        <div class="activity-badge">LOCAL</div>
+                        <div class="activity-icon">👥</div>
+                        <div class="activity-title">Fan Meetups</div>
+                        <div class="activity-subtitle">Connect locally</div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="height: 120px;"></div>
+        </div>
     </div>
 
     <!-- Enhanced Navigation -->
     <div class="bottom-nav-enhanced">
         <div class="nav-items-enhanced">
-            <div class="nav-item-enhanced active" onclick="switchTab('drops')">
+            <div class="nav-item-enhanced active" onclick="switchTab('home')">
+                <div class="nav-icon-enhanced">🏠</div>
+                <div class="nav-label-enhanced">Home</div>
+            </div>
+            <div class="nav-item-enhanced" onclick="switchTab('map')">
+                <div class="nav-icon-enhanced">🗺️</div>
+                <div class="nav-label-enhanced">Map</div>
+            </div>
+            <div class="nav-item-enhanced" onclick="switchTab('activities')">
+                <div class="nav-icon-enhanced">🎮</div>
+                <div class="nav-label-enhanced">Activities</div>
+            </div>
+            <div class="nav-item-enhanced" onclick="switchTab('drops')">
                 <div class="nav-icon-enhanced">🎁</div>
                 <div class="nav-label-enhanced">Drops</div>
             </div>
-            <div class="nav-item-enhanced" onclick="switchTab('hunt')">
-                <div class="nav-icon-enhanced">🎯</div>
-                <div class="nav-label-enhanced">Hunt</div>
-            </div>
-            <div class="nav-item-enhanced" onclick="switchTab('trade')">
-                <div class="nav-icon-enhanced">💰</div>
-                <div class="nav-label-enhanced">Trade</div>
-            </div>
-            <div class="nav-item-enhanced" onclick="switchTab('vault')">
-                <div class="nav-icon-enhanced">💎</div>
-                <div class="nav-label-enhanced">Vault</div>
-            </div>
-            <div class="nav-item-enhanced" onclick="switchTab('ai')">
-                <div class="nav-icon-enhanced">🤖</div>
-                <div class="nav-label-enhanced">AI</div>
+            <div class="nav-item-enhanced" onclick="switchTab('profile')">
+                <div class="nav-icon-enhanced">👤</div>
+                <div class="nav-label-enhanced">Profile</div>
             </div>
         </div>
     </div>
 
     <!-- Enhanced Modals -->
-    <div id="arModal" class="modal-enhanced">
+    <div id="mapModal" class="modal-enhanced">
         <div class="modal-content-enhanced">
-            <button class="close-btn" onclick="closeModal('arModal')" style="position: absolute; top: 15px; right: 20px; background: none; border: none; color: white; font-size: 24px; cursor: pointer;">&times;</button>
-            <div style="font-size: 24px; font-weight: 700; margin-bottom: 15px;">🎯 AI AR Scanner</div>
-            <div style="font-size: 16px; margin-bottom: 25px; opacity: 0.9;">
-                AI is analyzing your surroundings for hidden clues...
-            </div>
-            <div style="background: rgba(0,0,0,0.5); height: 200px; border-radius: 20px; display: flex; align-items: center; justify-content: center; margin: 20px 0; position: relative; overflow: hidden;">
-                <div style="font-size: 48px;">📷</div>
-                <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(45deg, transparent, rgba(78, 205, 196, 0.3), transparent); animation: scanLine 2s linear infinite;"></div>
-            </div>
-            <div class="loading-spinner"></div>
-            <button class="btn-enhanced btn-primary-enhanced" onclick="foundClue()">🎉 Clue Detected!</button>
+            <button class="close-btn" onclick="closeModal('mapModal')">&times;</button>
+            <div id="mapModalTitle" style="font-size: 24px; font-weight: 700; margin-bottom: 15px;">Location Info</div>
+            <div id="mapModalContent" style="font-size: 16px; margin-bottom: 25px; opacity: 0.9;">Loading location details...</div>
+            <div id="mapModalIcon" style="font-size: 48px; margin: 20px 0;">📍</div>
+            <button class="btn-enhanced btn-primary-enhanced" onclick="navigateToLocation()">Navigate There</button>
         </div>
     </div>
 
-    <div id="nftModal" class="modal-enhanced">
+    <div id="activityModal" class="modal-enhanced">
         <div class="modal-content-enhanced">
-            <button class="close-btn" onclick="closeModal('nftModal')">&times;</button>
-            <div id="nftTitle" style="font-size: 24px; font-weight: 700; margin-bottom: 15px;">Digital Collectible</div>
-            <div id="nftDescription" style="font-size: 16px; margin-bottom: 25px; opacity: 0.9;">Exclusive content from Cam Carter</div>
-            <div style="background: rgba(0,0,0,0.3); height: 150px; border-radius: 20px; display: flex; align-items: center; justify-content: center; margin: 20px 0; font-size: 48px;" id="nftIcon">💎</div>
-            <div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
-                <span>Current Price:</span>
-                <span id="nftPrice" style="color: #4ECDC4; font-weight: 700;">0.05 ETH</span>
-            </div>
-            <button class="btn-enhanced btn-primary-enhanced" onclick="purchaseNFT()">🚀 Purchase NFT</button>
+            <button class="close-btn" onclick="closeModal('activityModal')">&times;</button>
+            <div id="activityModalTitle" style="font-size: 24px; font-weight: 700; margin-bottom: 15px;">Activity</div>
+            <div id="activityModalContent" style="font-size: 16px; margin-bottom: 25px; opacity: 0.9;">Activity details...</div>
+            <div id="activityModalIcon" style="font-size: 48px; margin: 20px 0;">🎮</div>
+            <button class="btn-enhanced btn-primary-enhanced" onclick="startActivity()">Start Activity</button>
         </div>
     </div>
 
@@ -992,7 +941,324 @@
     </div>
 
     <script>
-        // Initialize particles
+        // Authentication System
+        let currentUser = null;
+        let verificationCodeSent = null;
+
+        function showLogin() {
+            document.getElementById('loginForm').style.display = 'block';
+            document.getElementById('signupForm').style.display = 'none';
+            document.getElementById('verificationForm').style.display = 'none';
+        }
+
+        function showSignup() {
+            document.getElementById('loginForm').style.display = 'none';
+            document.getElementById('signupForm').style.display = 'block';
+            document.getElementById('verificationForm').style.display = 'none';
+        }
+
+        function handleLogin(event) {
+            event.preventDefault();
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            // Simulate login validation
+            if (email && password) {
+                currentUser = { email, name: email.split('@')[0] };
+                showApp();
+                showNotification('Welcome back! Logged in successfully.', 'success');
+            } else {
+                showNotification('Please enter valid credentials.', 'error');
+            }
+        }
+
+        function handleSignup(event) {
+            event.preventDefault();
+            const name = document.getElementById('signupName').value;
+            const email = document.getElementById('signupEmail').value;
+            const password = document.getElementById('signupPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            
+            if (password !== confirmPassword) {
+                showNotification('Passwords do not match.', 'error');
+                return;
+            }
+            
+            if (name && email && password) {
+                currentUser = { email, name };
+                sendVerificationCode(email);
+                showVerification();
+            } else {
+                showNotification('Please fill in all fields.', 'error');
+            }
+        }
+
+        function sendVerificationCode(email) {
+            // Generate random 6-digit code
+            verificationCodeSent = Math.floor(100000 + Math.random() * 900000).toString();
+            
+            // Simulate email sending
+            console.log(`Verification code sent to ${email}: ${verificationCodeSent}`);
+            
+            // Show status
+            const statusDiv = document.getElementById('verificationStatus');
+            statusDiv.innerHTML = `<div class="status-info">📧 Verification code sent to ${email}</div>`;
+            
+            // For demo purposes, show the code in console and notification
+            showNotification(`Demo: Your verification code is ${verificationCodeSent}`, 'info');
+        }
+
+        function showVerification() {
+            document.getElementById('loginForm').style.display = 'none';
+            document.getElementById('signupForm').style.display = 'none';
+            document.getElementById('verificationForm').style.display = 'block';
+            document.getElementById('verificationEmail').textContent = currentUser.email;
+        }
+
+        function handleVerification(event) {
+            event.preventDefault();
+            const enteredCode = document.getElementById('verificationCode').value;
+            const statusDiv = document.getElementById('verificationStatus');
+            
+            if (enteredCode === verificationCodeSent) {
+                statusDiv.innerHTML = '<div class="status-success">✅ Email verified successfully!</div>';
+                setTimeout(() => {
+                    showApp();
+                    showNotification('Account created and verified! Welcome to the experience.', 'success');
+                }, 1500);
+            } else {
+                statusDiv.innerHTML = '<div class="status-error">❌ Invalid verification code. Please try again.</div>';
+            }
+        }
+
+        function resendCode() {
+            if (currentUser && currentUser.email) {
+                sendVerificationCode(currentUser.email);
+                showNotification('Verification code resent!', 'info');
+            }
+        }
+
+        function showApp() {
+            document.getElementById('authOverlay').style.display = 'none';
+            document.getElementById('appContainer').style.display = 'block';
+            document.getElementById('userName').textContent = currentUser.name;
+            initializeApp();
+        }
+
+        // Map Functions
+        let mapZoom = 1;
+        let mapLayer = 'default';
+
+        function showMarkerInfo(type) {
+            const markerData = {
+                concert: {
+                    title: '🎤 Live Concert',
+                    content: 'Cam Carter performing live at Venice Beach Amphitheater. Special guest appearances and exclusive merch available.',
+                    icon: '🎤',
+                    time: 'Tonight 8:00 PM'
+                },
+                nft: {
+                    title: '💎 NFT Hotspot',
+                    content: 'Rare NFT drops happening here! Limited edition digital collectibles with exclusive artwork and utilities.',
+                    icon: '💎',
+                    time: 'Active now'
+                },
+                drop: {
+                    title: '🎁 Merch Drop Zone',
+                    content: 'Physical merchandise drop location. Limited quantities of signed hoodies, vinyl records, and exclusive accessories.',
+                    icon: '🎁',
+                    time: '30 minutes remaining'
+                },
+                fan: {
+                    title: '👥 Fan Meetup',
+                    content: 'Local fans gathering for listening party and trading session. Join the community and make new connections!',
+                    icon: '👥',
+                    time: 'Starting in 1 hour'
+                }
+            };
+
+            const data = markerData[type];
+            document.getElementById('mapModalTitle').textContent = data.title;
+            document.getElementById('mapModalContent').innerHTML = `
+                <p>${data.content}</p>
+                <div style="margin-top: 15px; padding: 10px; background: rgba(255, 215, 0, 0.1); border-radius: 10px; border-left: 4px solid #FFD700;">
+                    <strong>⏰ ${data.time}</strong>
+                </div>
+            `;
+            document.getElementById('mapModalIcon').textContent = data.icon;
+            document.getElementById('mapModal').style.display = 'flex';
+        }
+
+        function navigateToLocation() {
+            closeModal('mapModal');
+            showNotification('Opening navigation to location...', 'success');
+        }
+
+        function zoomIn() {
+            mapZoom = Math.min(mapZoom + 0.2, 3);
+            updateMapView();
+            showNotification('Zoomed in', 'info');
+        }
+
+        function zoomOut() {
+            mapZoom = Math.max(mapZoom - 0.2, 0.5);
+            updateMapView();
+            showNotification('Zoomed out', 'info');
+        }
+
+        function centerMap() {
+            showNotification('Map centered on your location', 'info');
+        }
+
+        function toggleLayer() {
+            mapLayer = mapLayer === 'default' ? 'satellite' : 'default';
+            const mapView = document.getElementById('mapView');
+            if (mapLayer === 'satellite') {
+                mapView.style.background = 'linear-gradient(45deg, #1a1a2e, #16213e)';
+                showNotification('Switched to satellite view', 'info');
+            } else {
+                mapView.style.background = 'linear-gradient(45deg, #2c3e50, #34495e)';
+                showNotification('Switched to default view', 'info');
+            }
+        }
+
+        function updateMapView() {
+            const mapView = document.getElementById('mapView');
+            mapView.style.transform = `scale(${mapZoom})`;
+        }
+
+        // Activity Functions
+        function openActivity(type) {
+            const activityData = {
+                karaoke: {
+                    title: '🎤 Virtual Karaoke Night',
+                    content: 'Join live karaoke sessions with fans worldwide! Sing your favorite Cam Carter tracks and discover new voices in the community.',
+                    icon: '🎤',
+                    action: 'Join Karaoke Room'
+                },
+                remix: {
+                    title: '🎵 Beat Remix Studio',
+                    content: 'Access professional tools to remix Cam Carter\'s tracks. Share your creations and get featured on official playlists!',
+                    icon: '🎵',
+                    action: 'Open Studio'
+                },
+                trivia: {
+                    title: '🧠 Daily Music Trivia',
+                    content: 'Test your knowledge about Cam Carter\'s music, career, and behind-the-scenes facts. Compete with fans for exclusive rewards!',
+                    icon: '🧠',
+                    action: 'Start Quiz'
+                },
+                dance: {
+                    title: '💃 Dance Challenge Arena',
+                    content: 'Show off your moves to the latest tracks! Record your dance videos and participate in viral challenges for prizes.',
+                    icon: '💃',
+                    action: 'Start Dancing'
+                },
+                lyrics: {
+                    title: '✍️ Collaborative Lyrics',
+                    content: 'Work with other fans to write lyrics for upcoming tracks. Your contributions might make it into official releases!',
+                    icon: '✍️',
+                    action: 'Start Writing'
+                },
+                concert: {
+                    title: '🎪 Virtual Concert Hall',
+                    content: 'Experience immersive virtual concerts with 360° views, backstage access, and real-time interaction with Cam Carter.',
+                    icon: '🎪',
+                    action: 'Enter Concert'
+                },
+                fanart: {
+                    title: '🎨 Fan Art Gallery',
+                    content: 'Browse and share amazing fan artwork! Upload your creations, vote on favorites, and get featured in official content.',
+                    icon: '🎨',
+                    action: 'Visit Gallery'
+                },
+                meetup: {
+                    title: '👥 Local Fan Meetups',
+                    content: 'Connect with fans in your area! Organize listening parties, trading sessions, and real-world community events.',
+                    icon: '👥',
+                    action: 'Find Meetups'
+                }
+            };
+
+            const data = activityData[type];
+            document.getElementById('activityModalTitle').textContent = data.title;
+            document.getElementById('activityModalContent').textContent = data.content;
+            document.getElementById('activityModalIcon').textContent = data.icon;
+            
+            // Store current activity for the start button
+            window.currentActivity = { type, action: data.action };
+            
+            document.getElementById('activityModal').style.display = 'flex';
+        }
+
+        function startActivity() {
+            if (window.currentActivity) {
+                closeModal('activityModal');
+                showNotification(`${window.currentActivity.action} started! Loading experience...`, 'success');
+                updateStats();
+            }
+        }
+
+        // Navigation
+        function switchTab(tab) {
+            document.querySelectorAll('.nav-item-enhanced').forEach(item => {
+                item.classList.remove('active');
+            });
+            event.currentTarget.classList.add('active');
+            
+            const messages = {
+                home: 'Welcome to your personalized dashboard!',
+                map: 'Interactive map loaded with live locations!',
+                activities: 'Fan activities hub ready for action!',
+                drops: 'Latest drops and exclusive content available!',
+                profile: 'Your profile and achievements loaded!'
+            };
+            
+            showNotification(messages[tab], 'info');
+        }
+
+        // Utility Functions
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = 'notification';
+            notification.innerHTML = `
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <div style="font-size: 20px;">${type === 'success' ? '✅' : type === 'info' ? 'ℹ️' : type === 'error' ? '❌' : '⚠️'}</div>
+                    <div style="font-size: 14px;">${message}</div>
+                </div>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'notificationSlide 0.5s ease reverse';
+                setTimeout(() => notification.remove(), 500);
+            }, 4000);
+        }
+
+        function updateStats() {
+            const stats = {
+                activeDrops: document.getElementById('activeDrops'),
+                fanCount: document.getElementById('fanCount'),
+                earnings: document.getElementById('earnings')
+            };
+            
+            // Animate stat updates
+            Object.values(stats).forEach(stat => {
+                stat.style.animation = 'bounce 0.6s ease';
+            });
+            
+            setTimeout(() => {
+                stats.activeDrops.textContent = Math.floor(Math.random() * 3) + 5;
+                stats.fanCount.textContent = (15.2 + Math.random() * 0.8).toFixed(1) + 'K';
+                stats.earnings.textContent = '$' + (12.8 + Math.random() * 3).toFixed(1) + 'K';
+            }, 300);
+        }
+
         function createParticles() {
             const particlesContainer = document.getElementById('particles');
             for (let i = 0; i < 50; i++) {
@@ -1005,182 +1271,24 @@
             }
         }
 
-        // Voice Assistant
-        let isListening = false;
-        function toggleVoiceAssistant() {
-            const assistant = document.getElementById('voiceAssistant');
-            isListening = !isListening;
-            
-            if (isListening) {
-                assistant.classList.add('listening');
-                assistant.innerHTML = '🎙️';
-                showNotification('AI Assistant listening...', 'info');
-                
-                setTimeout(() => {
-                    isListening = false;
-                    assistant.classList.remove('listening');
-                    assistant.innerHTML = '🎤';
-                    showNotification('AI: "I found 3 new drops near you!"', 'success');
-                }, 3000);
-            }
-        }
-
-        // Enhanced Functions
-        function startAIHunt() {
-            showNotification('AI Hunt activated! Follow the heat signatures.', 'success');
-            updateStats();
-        }
-
-        function view3DMerch(item) {
-            showNotification(`Viewing ${item} in 3D mode...`, 'info');
-        }
-
-        function openARCamera() {
-            document.getElementById('arModal').style.display = 'flex';
-        }
-
-        function getAIHint() {
-            const hints = [
-                'AI detected unusual electromagnetic activity near the boardwalk...',
-                'Thermal imaging shows a hidden object 50 meters north...',
-                'Pattern recognition suggests checking the vintage record shop...'
-            ];
-            showNotification(hints[Math.floor(Math.random() * hints.length)], 'info');
-        }
-
-        function openTrading() {
-            showNotification('Connecting to trading floor... 47 fans online!', 'success');
-        }
-
-        function viewEnhancedNFT(type) {
-            const nftData = {
-                lyrics: {
-                    title: '📝 Lyric Genesis Collection',
-                    description: 'Handwritten lyrics with AI-generated visual interpretations and exclusive commentary tracks.',
-                    icon: '📝',
-                    price: '0.05 ETH'
-                },
-                beats: {
-                    title: '🎵 Beat Vault Unlimited',
-                    description: 'Producer-grade instrumentals with stem separation and AI remix capabilities.',
-                    icon: '🎵',
-                    price: '0.12 ETH'
-                },
-                footage: {
-                    title: '🎬 Studio Secrets Archive',
-                    description: 'Behind-the-scenes footage with AI-enhanced 4K upscaling and director commentary.',
-                    icon: '🎬',
-                    price: '0.25 ETH'
-                },
-                vip: {
-                    title: '👑 VIP Universe Access',
-                    description: 'Lifetime access to all content, AI-powered personalized experiences, and virtual concerts.',
-                    icon: '👑',
-                    price: '0.5 ETH'
-                }
-            };
-
-            const data = nftData[type];
-            document.getElementById('nftTitle').textContent = data.title;
-            document.getElementById('nftDescription').textContent = data.description;
-            document.getElementById('nftIcon').textContent = data.icon;
-            document.getElementById('nftPrice').textContent = data.price;
-            document.getElementById('nftModal').style.display = 'flex';
-        }
-
-        function purchaseNFT() {
-            closeModal('nftModal');
-            showNotification('NFT purchase processing... Smart contract executing!', 'success');
-            updateStats();
-        }
-
-        function foundClue() {
-            closeModal('arModal');
-            showNotification('Clue verified by AI! Reward unlocked: Limited Edition Hoodie', 'success');
-            
-            // Update progress
-            const progressCircle = document.querySelector('.progress-ring-progress');
-            progressCircle.style.strokeDashoffset = '45';
-            document.querySelector('.progress-percentage').textContent = '80%';
-            
-            updateStats();
-        }
-
-        function switchTab(tab) {
-            document.querySelectorAll('.nav-item-enhanced').forEach(item => {
-                item.classList.remove('active');
-            });
-            event.currentTarget.classList.add('active');
-            
-            const messages = {
-                drops: 'AI found 3 new drops in your area!',
-                hunt: 'AR Hunt mode activated. Scan your surroundings!',
-                trade: 'Trading floor loaded. 47 fans active!',
-                vault: 'Digital vault opened. 12 NFTs available!',
-                ai: 'AI Assistant ready. How can I help?'
-            };
-            
-            showNotification(messages[tab], 'info');
-        }
-
-        function closeModal(modalId) {
-            document.getElementById(modalId).style.display = 'none';
-        }
-
-        function showNotification(message, type = 'info') {
-            const notification = document.createElement('div');
-            notification.className = 'notification';
-            notification.innerHTML = `
-                <div style="display: flex; align-items: center; gap: 10px;">
-                    <div style="font-size: 20px;">${type === 'success' ? '✅' : type === 'info' ? 'ℹ️' : '⚠️'}</div>
-                    <div style="font-size: 14px;">${message}</div>
-                </div>
-            `;
-            
-            document.body.appendChild(notification);
-            
-            setTimeout(() => {
-                notification.style.animation = 'notificationSlide 0.5s ease reverse';
-                setTimeout(() => notification.remove(), 500);
-            }, 3000);
-        }
-
-        function updateStats() {
-            const stats = {
-                activeDrops: document.getElementById('activeDrops'),
-                fanCount: document.getElementById('fanCount'),
-                earnings: document.getElementById('earnings')
-            };
-            
-            // Animate stat updates
-            stats.activeDrops.style.animation = 'bounce 0.6s ease';
-            stats.fanCount.style.animation = 'bounce 0.6s ease';
-            stats.earnings.style.animation = 'bounce 0.6s ease';
-            
-            setTimeout(() => {
-                stats.activeDrops.textContent = Math.floor(Math.random() * 3) + 3;
-                stats.fanCount.textContent = (12.4 + Math.random() * 0.5).toFixed(1) + 'K';
-                stats.earnings.textContent = '$' + (8.2 + Math.random() * 2).toFixed(1) + 'K';
-            }, 300);
-        }
-
-        // Initialize
-        document.addEventListener('DOMContentLoaded', function() {
+        function initializeApp() {
             createParticles();
             
-            // Auto-update stats every 30 seconds
-            setInterval(updateStats, 30000);
+            // Auto-update stats every 45 seconds
+            setInterval(updateStats, 45000);
             
-            // Add scan line animation
-            const style = document.createElement('style');
-            style.textContent = `
-                @keyframes scanLine {
-                    0% { transform: translateX(-100%); }
-                    100% { transform: translateX(100%); }
-                }
-            `;
-            document.head.appendChild(style);
-        });
+            // Simulate real-time map updates
+            setInterval(() => {
+                const markers = document.querySelectorAll('.map-marker');
+                markers.forEach(marker => {
+                    // Slightly move markers to simulate real-time updates
+                    const currentTop = parseFloat(marker.style.top) || 30;
+                    const currentLeft = parseFloat(marker.style.left) || 25;
+                    marker.style.top = (currentTop + (Math.random() - 0.5) * 2) + '%';
+                    marker.style.left = (currentLeft + (Math.random() - 0.5) * 2) + '%';
+                });
+            }, 10000);
+        }
 
         // Close modals when clicking outside
         window.onclick = function(event) {
@@ -1191,5 +1299,10 @@
                 }
             });
         }
+
+        // Initialize particles immediately
+        document.addEventListener('DOMContentLoaded', function() {
+            createParticles();
+        });
     </script>
 </html>
